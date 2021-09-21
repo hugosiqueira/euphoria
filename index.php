@@ -35,10 +35,13 @@ $route->get("/config/user/", "Users:user");
 $route->post("/config/user/", "Users:user");
 $route->get("/config/user/{user_id}", "Users:user");
 $route->post("/config/user/{user_id}", "Users:user");
-$route->get("/config/schools", "Users:home");
-$route->get("/config/companies", "Users:home");
-$route->get("/config/roles", "Users:home");
-$route->get("/config/events", "Users:home");
+$route->get("/config/schools", "Config:schools");
+$route->get("/config/companies", "Config:companies");
+$route->get("/config/roles", "Config:roles");
+$route->get("/config/events", "Config:events");
+$route->get("/config/courses", "Config:courses");
+
+
 
 
 //login

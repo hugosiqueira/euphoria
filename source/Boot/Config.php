@@ -3,16 +3,19 @@
  * DATABASE
  */
 define("CONF_DB_HOST", "localhost");
-define("CONF_DB_USER", "root");
-define("CONF_DB_PASS", "");
+define("CONF_DB_USER", "euphoria");
+define("CONF_DB_PASS", "!@9Fdsk8es#$5");
 define("CONF_DB_NAME", "euphoria_po");
 
 /**
  * PROJECT URLs
  */
-define("CONF_URL_BASE", "https://localhost/po");
+if ($_SERVER['HTTP_HOST'] == 'localhost'):
+    define("CONF_URL_BASE", "https://localhost/po");
+else:
+    define("CONF_URL_BASE", "https://wide.euphoriamg.com.br");
+endif;
 define("CONF_URL_TEST", "https://localhost/po");
-
 /**
  * SITE
  */

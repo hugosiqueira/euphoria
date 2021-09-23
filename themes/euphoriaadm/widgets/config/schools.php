@@ -43,14 +43,8 @@
                         </div>
                         <h4>Empresa</h4>
                     </div>
-                    <div class="user-email">
-                        <h4>E-mail</h4>
-                    </div>
-                    <div class="user-phone">
-                        <h4>Telefone</h4>
-                    </div>
-                    <div class="action-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2  delete-multiple"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    <div>
+                        <h4>Ações</h4>
                     </div>
                 </div>
             </div>
@@ -65,7 +59,7 @@
                                     <span class="new-control-indicator"></span>
                                 </label>
                             </div>
-                            <img src="<?= theme("/assets/img/avatar.jpg", CONF_VIEW_ADMIN); ?>" alt="avatar">
+                            <img src="<?= theme("/assets/img/university.png", CONF_VIEW_ADMIN); ?>" alt="universidade">
 
                             <div class="user-meta-info">
                                 <p class="user-name" data-name="<?= $school->name; ?>"><?= $school->name; ?></p>
@@ -87,7 +81,7 @@
                                data-confirm-cancel = "Cancelar"
                                data-confirm="ATENÇÃO: Tem certeza que deseja excluir a instituição e todos os dados relacionados a ela? Essa ação não pode ser desfeita!"
                                data-user_id="<?= $school->id; ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-minus delete"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                             </a>
                         </div>
                     </div>

@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-md-12 mr-auto mt-5 text-md-center text-center">
             <a href="<?=CONF_URL_BASE;?>" class="ml-md-5">
-                <img alt="image-404" src="<?= theme("assets/img/euphoria-formaturas-logo.png", CONF_VIEW_ADMIN);?>" style="margin: auto;">
+                <img alt="image-404" src="<?= theme("assets/img/euphoria-formaturas-logo-escuro.png", CONF_VIEW_ADMIN);?>" style="margin: auto;">
             </a>
         </div>
     </div>

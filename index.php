@@ -36,6 +36,8 @@ $route->post("/config/user/", "Users:user");
 $route->get("/config/user/{user_id}", "Users:user");
 $route->post("/config/user/{user_id}", "Users:user");
 $route->get("/config/schools", "Config:schools");
+$route->get("/config/school", "Schools:school");
+$route->post("/config/school", "Schools:school");
 $route->get("/config/companies", "Config:companies");
 $route->get("/config/roles", "Config:roles");
 $route->get("/config/events", "Config:events");

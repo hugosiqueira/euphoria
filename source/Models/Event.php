@@ -6,7 +6,7 @@ class Event extends \Source\Core\Model
 {
     public function __construct()
     {
-        parent::__construct("event", ["id"], ["name"]);
+        parent::__construct("events", ["id"], ["name"]);
     }
 
     /**

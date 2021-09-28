@@ -11,10 +11,7 @@ $v->start("styles"); ?>
 <link href="<?= theme("assets/css/forms/theme-checkbox-radio.css", CONF_VIEW_ADMIN);?>" rel="stylesheet" type="text/css"/>
 <?php $v->end(); ?>
 <!--  BEGIN CONTENT AREA  -->
-
-
     <div class="account-settings-container layout-top-spacing">
-
         <div class="account-content">
             <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
                 <div class="row">

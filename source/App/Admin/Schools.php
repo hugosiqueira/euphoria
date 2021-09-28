@@ -1,15 +1,11 @@
 <?php
 
 namespace Source\App\Admin;
+use Source\Models\City;
+use Source\Models\School;
+use Source\Models\State;
 
-use Source\Models\Permissions\Permission;
-use Source\Models\Permissions\UserPermission;
-use Source\Models\Role;
-use Source\Models\User;
-use Source\Support\Thumb;
-use Source\Support\Upload;
-
-class Schools
+class Schools extends Admin
 {
     /**
      * Schools constructor.
@@ -23,96 +19,30 @@ class Schools
      * @param array|null $data
      * @throws \Exception
      */
-    public function user(?array $data): void
+    public function school(?array $data): void
     {
-        //update permissions
-        if((!empty($data["action"]) && $data["action"] == "user_permission")){
-            $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
-            //Deletando permissoes antigas
-            $userPermissionDelete = (new UserPermission())->findByUser($data["users_id"]);
-            foreach ($userPermissionDelete as $item) {
-                $permissionDelete = (new UserPermission())->findById($item->id);
-                $permissionDelete->destroy();
-            }
-
-            //Criando novas permissões
-            $userPermissionNew = (new UserPermission());
-
-            foreach($data as $param_key => $value) {
-                $userPermissionNew->users_id = $data["users_id"];
-                if(substr($param_key, 0, strlen("permission")) == "permission") {
-                    $widget_part = explode("-", $param_key);
-                    $widget_id = (int)$widget_part[1];
-                    $userPermissionNew->widgets_id = $widget_id;
-                    foreach ($data["permission-" . $widget_id] as $item) {
-                        if ($item == "can_view")
-                            $userPermissionNew->can_view = 1;
-                        if ($item == "can_add")
-                            $userPermissionNew->can_add = 1;
-                        if ($item == "can_edit")
-                            $userPermissionNew->can_edit = 1;
-                        if ($item == "can_delete")
-                            $userPermissionNew->can_delete = 1;
-                    }
-                    $userPermissionNew->save();
-                }
-            }
-            $this->message->success("Permissões atualizadas com sucesso...")->flash();
-            echo json_encode(["reload" => true]);
-            return;
-        }
+        
         //create
         if (!empty($data["action"]) && $data["action"] == "create") {
             $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
 
-            $userCreate = new User();
-            $userCreate->first_name = $data["first_name"];
-            $userCreate->last_name = $data["last_name"];
-            $userCreate->email = $data["email"];
-            $pass = generatePassword();
-            $userCreate->password = (empty($data["password"]) ? $pass : $data["password"]);
-            $userCreate->roles_id = $data["roles_id"];
-            $userCreate->cellphone = $data["cellphone"];
+            $schoolCreate = new School();
+            $schoolCreate->name = $data["name"];
+            $schoolCreate->sigla = $data["sigla"];
+            $schoolCreate->address = $data["address"];
+            $schoolCreate->number = $data["number"];
+            $schoolCreate->states_id = $data["states_id"];
+            $schoolCreate->cities_id = $data["cities_id"];
+            $schoolCreate->created_at = date('Y-m-d H:i:s');
 
-
-            //upload photo
-            if (!empty($_FILES["photo"])) {
-                $files = $_FILES["photo"];
-                $upload = new Upload();
-                $image = $upload->image($files, $userCreate->fullName(), 600);
-
-                if (!$image) {
-                    $json["message"] = $upload->message()->render();
-                    echo json_encode($json);
-                    return;
-                }
-
-                $userCreate->photo = $image;
-            }
-
-            if (!$userCreate->save($pass)) {
-                $json["message"] = $userCreate->message()->render();
+            if (!$schoolCreate->save()) {
+                $json["message"] = $schoolCreate->message()->render();
                 echo json_encode($json);
                 return;
             }
 
-            $userPermission = new UserPermission();
-            $rolesPermissions = (new Permission())->findByRoles($data["roles_id"]);
-            foreach ($rolesPermissions as $p):
-                $userPermission->users_id = $userCreate->id;
-                $userPermission->widgets_id = $p->widgets_id;
-                $userPermission->can_view = $p->can_view;
-                $userPermission->can_add = $p->can_add;
-                $userPermission->can_edit = $p->can_edit;
-                $userPermission->can_delete = $p->can_delete;
-                $userPermission->save();
-            endforeach;
-
-
-
-            $this->message->success("Usuário cadastrado com sucesso...")->flash();
-            $json["redirect"] = url("/admin/config/user/{$userCreate->id}");
-
+            $this->message->success("Instituição cadastrada com sucesso...")->flash();
+            $json["redirect"] = url("/admin/config/school/{$schoolCreate->id}");
             echo json_encode($json);
             return;
         }
@@ -120,69 +50,28 @@ class Schools
         //update
         if (!empty($data["action"]) && $data["action"] == "update") {
             $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
-            $userUpdate = (new User())->findById($data["user_id"]);
+            $schoolUpdate = (new School())->findById($data["school_id"]);
 
-            if (!$userUpdate) {
-                $this->message->error("Você tentou gerenciar um usuário que não existe")->flash();
-                echo json_encode(["redirect" => url("/admin/users/home")]);
+            if (!$schoolUpdate) {
+                $this->message->error("Você tentou editar uma instituição que não existe")->flash();
+                echo json_encode(["redirect" => url("/admin/config/schools")]);
                 return;
             }
-            $changePermission = ($userUpdate->roles_id != $data["roles_id"] ? "true" : "false" );
 
-            $userUpdate->first_name = (!empty($data["first_name"]) ? $data["first_name"] : $userUpdate->first_name);
-            $userUpdate->last_name = (!empty($data["last_name"]) ? $data["last_name"] : $userUpdate->last_name);
-            $userUpdate->email = (!empty($data["email"]) ? $data["email"] : $userUpdate->email);
-            $userUpdate->password = (!empty($data["password"]) ? $data["password"] : $userUpdate->password);
-            $userUpdate->roles_id = (!empty($data["roles_id"]) ? $data["roles_id"] : $userUpdate->roles_id);
+            $schoolUpdate->name = (!empty($data["name"]) ? $data["name"] : $schoolUpdate->name);
+            $schoolUpdate->sigla = (!empty($data["sigla"]) ? $data["sigla"] : $schoolUpdate->sigla);
+            $schoolUpdate->address = (!empty($data["address"]) ? $data["address"] : $schoolUpdate->address);
+            $schoolUpdate->number = (!empty($data["number"]) ? $data["number"] : $schoolUpdate->number);
+            $schoolUpdate->states_id = (!empty($data["states_id"]) ? $data["states_id"] : $schoolUpdate->states_id);
+            $schoolUpdate->cities_id = (!empty($data["cities_id"]) ? $data["cities_id"] : $schoolUpdate->cities_id);
 
-            //upload photo
-            if (!empty($_FILES["photo"])) {
-                if ($userUpdate->photo && file_exists(__DIR__ . "/../../../" . CONF_UPLOAD_DIR . "/{$userUpdate->photo}")) {
-                    unlink(__DIR__ . "/../../../" . CONF_UPLOAD_DIR . "/{$userUpdate->photo}");
-                    (new Thumb())->flush($userUpdate->photo);
-                }
-
-                $files = $_FILES["photo"];
-                $upload = new Upload();
-                $image = $upload->image($files, $userUpdate->fullName(), 600);
-
-                if (!$image) {
-                    $json["message"] = $upload->message()->render();
-                    echo json_encode($json);
-                    return;
-                }
-
-                $userUpdate->photo = $image;
-            }
-
-            if (!$userUpdate->save()) {
-                $json["message"] = $userUpdate->message()->render();
+            if (!$schoolUpdate->save()) {
+                $json["message"] = $schoolUpdate->message()->render();
                 echo json_encode($json);
                 return;
             }
 
-            if ($changePermission=="true"){
-                $userPermissionDelete = (new UserPermission())->findByUser($data["user_id"]);
-                foreach ($userPermissionDelete as $item) {
-                    $permissionDelete = (new UserPermission())->findById($item->id);
-                    $permissionDelete->destroy();
-                }
-
-
-                $userPermission = new UserPermission();
-                $rolesPermissions = (new Permission())->findByRoles($data["roles_id"]);
-                foreach ($rolesPermissions as $p):
-                    $userPermission->users_id = $data["user_id"];
-                    $userPermission->widgets_id = $p->widgets_id;
-                    $userPermission->can_view = $p->can_view;
-                    $userPermission->can_add = $p->can_add;
-                    $userPermission->can_edit = $p->can_edit;
-                    $userPermission->can_delete = $p->can_delete;
-                    $userPermission->save();
-                endforeach;
-            }
-
-            $this->message->success("Usuário atualizado com sucesso...")->flash();
+            $this->message->success("Instituição atualizada com sucesso...")->flash();
             echo json_encode(["reload" => true]);
             return;
         }
@@ -190,56 +79,42 @@ class Schools
         //delete
         if (!empty($data["action"]) && $data["action"] == "delete") {
             $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
-            $userDelete = (new User())->findById($data["user_id"]);
+            $schoolDelete = (new School())->findById($data["school_id"]);
 
-            if (!$userDelete) {
-                $this->message->error("Você tentou deletar um usuário que não existe")->flash();
-                echo json_encode(["redirect" => url("/admin/users/home")]);
+            if (!$schoolDelete) {
+                $this->message->error("Você tentou deletar uma instituição que não existe")->flash();
+                echo json_encode(["redirect" => url("/admin/config/schools")]);
                 return;
             }
 
-            if ($userDelete->photo && file_exists(__DIR__ . "/../../../" . CONF_UPLOAD_DIR . "/{$userDelete->photo}")) {
-                unlink(__DIR__ . "/../../../" . CONF_UPLOAD_DIR . "/{$userDelete->photo}");
-                (new Thumb())->flush($userDelete->photo);
-            }
+            $schoolDelete->destroy();
 
-            $userDelete->destroy();
-
-            $this->message->success("O usuário foi excluído com sucesso...")->flash();
-            echo json_encode(["redirect" => url("/admin/users/home")]);
-
+            $this->message->success("A instituição foi excluída com sucesso...")->flash();
+            echo json_encode(["redirect" => url("/admin/config/schools")]);
             return;
         }
 
-        $userEdit = null;
-        if (!empty($data["user_id"])) {
-            $userId = filter_var($data["user_id"], FILTER_VALIDATE_INT);
-            $userEdit = (new User())->findById($userId);
+        $schoolEdit = null;
+        if (!empty($data["school_id"])) {
+            $schoolId = filter_var($data["school_id"], FILTER_VALIDATE_INT);
+            $schoolEdit = (new School())->findById($schoolId);
         }
 
         $head = $this->seo->render(
-            CONF_SITE_NAME . " | " . ($userEdit ? "Perfil de {$userEdit->fullName()}" : "Novo Usuário"),
+            CONF_SITE_NAME . " | " . ($schoolEdit ? "Perfil de {$schoolEdit->name}" : "Novo Usuário"),
             CONF_SITE_DESC,
             url("/admin"),
             url("/admin/assets/images/image.jpg"),
             false
         );
-        $roles = (new Role())->find();
-        if(isset($userId)&&!empty($userId)):
-            $userPermission = (new UserPermission())->findByUser($userId);
-        else:
-            $userPermission = "";
-        endif;
 
-        echo $this->view->render("widgets/config/user", [
-            "app" => "config/users/user",
+        echo $this->view->render("widgets/config/school", [
+            "app" => "config/school",
             "head" => $head,
-            "user" => $userEdit,
-            "roles" =>$roles->order("name")->fetch(true),
-            "userPermission" =>$userPermission
-
+            "school" => $schoolEdit,
+            "states" => (new State())->find()->order('name')->fetch('all'),
+            "cities" => (new City())->find()->order('name')->fetch('all')
         ]);
     }
-
 
 }

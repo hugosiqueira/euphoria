@@ -1,37 +1,21 @@
 <?php
 
 namespace Source\Models;
-use Source\Core\Model;
 
-/**
- * Class Role - Função do Usuário
- */
-class Role extends Model
+class Course extends \Source\Core\Model
 {
-    /**
-     * Role Constructor
-     */
     public function __construct()
     {
-        parent::__construct("roles", ["id"], ["name"]);
-    }
-
-    /**
-     * @param int
-     * @return string
-     */
-    public function findRole(int $id)
-    {
-        return parent::find("id=:id", "id={$id}", "name");
+        parent::__construct("course", ["id"], ["name"]);
     }
 
     /**
      * @param string $name
-     * @return Role
+     * @return Course
      */
     public function bootstrap(
         string $name
-    ): Role {
+    ): Course {
         $this->name = $name;
         return $this;
     }
@@ -46,35 +30,33 @@ class Role extends Model
             return false;
         }
 
-        /** Role Update */
+        /** Course Update */
         if (!empty($this->id)) {
-            $roleId = $this->id;
+            $courseId = $this->id;
 
-            $this->update($this->safe(), "id = :id", "id={$roleId}");
+            $this->update($this->safe(), "id = :id", "id={$courseId}");
             if ($this->fail()) {
                 $this->message->error("Erro ao atualizar, verifique os dados");
                 return false;
             }
         }
 
-        /** Role Create */
+        /** Course Create */
         if (empty($this->id)) {
             if ($this->find("name = :n", "n={$this->name}", "id")->fetch()) {
-                $this->message->warning("O cargo informado já está cadastrado");
+                $this->message->warning("O curso informado já está cadastrado");
                 return false;
             }
 
-            $roleId = $this->create($this->safe());
+            $courseId = $this->create($this->safe());
             if ($this->fail()) {
                 $this->message->error("Erro ao cadastrar, verifique os dados");
                 return false;
             }
 
         }
-        $this->data = ($this->findById($roleId))->data();
+        $this->data = ($this->findById($courseId))->data();
 
         return true;
     }
-
-
 }

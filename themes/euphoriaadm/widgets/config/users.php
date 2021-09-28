@@ -4,10 +4,8 @@
 <link href="<?= url("/shared/scripts/plugins/jquery-ui/jquery-ui.min.css");?>" rel="stylesheet" type="text/css" />
 <link href="<?= theme("assets/css/apps/contacts.css", CONF_VIEW_ADMIN);?>" rel="stylesheet" type="text/css" />
 <?php $v->end(); ?>
-<div class="row layout-spacing " id="cancel-row"></div>
 <div class="col-lg-12">
     <div class="widget-content searchable-container list">
-
         <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-5 col-sm-7 filtered-list-search layout-spacing align-self-center">
                 <form class="form-inline my-2 my-lg-0">

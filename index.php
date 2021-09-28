@@ -38,10 +38,28 @@ $route->post("/config/user/{user_id}", "Users:user");
 $route->get("/config/schools", "Config:schools");
 $route->get("/config/school", "Schools:school");
 $route->post("/config/school", "Schools:school");
+$route->get("/config/school/{school_id}", "Schools:school");
+$route->post("/config/school/{school_id}", "Schools:school");
 $route->get("/config/companies", "Config:companies");
+$route->get("/config/company", "Companies:company");
+$route->post("/config/company", "Companies:company");
+$route->get("/config/company/{company_id}", "Companies:company");
+$route->post("/config/company/{company_id}", "Companies:company");
 $route->get("/config/roles", "Config:roles");
+$route->get("/config/role", "Roles:role");
+$route->post("/config/role", "Roles:role");
+$route->get("/config/role/{role_id}", "Roles:role");
+$route->post("/config/role/{role_id}", "Roles:role");
 $route->get("/config/events", "Config:events");
+$route->get("/config/event", "Events:event");
+$route->post("/config/event", "Events:event");
+$route->get("/config/event/{event_id}", "Events:event");
+$route->post("/config/event/{event_id}", "Events:event");
 $route->get("/config/courses", "Config:courses");
+$route->get("/config/course", "Courses:course");
+$route->post("/config/course", "Courses:course");
+$route->get("/config/course/{course_id}", "Courses:course");
+$route->post("/config/course/{course_id}", "Courses:course");
 
 
 

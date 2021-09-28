@@ -124,6 +124,8 @@ $userPhoto = ($photo ? image($photo, 300, 300) : theme("/assets/img/avatar.jpg",
     <!--  BEGIN CONTENT AREA  -->
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
+
+            <div class="layout-spacing" id="cancel-row"></div>
             <div class="ajax_response"><?= flash(); ?></div>
             <?= $v->section("content"); ?>
         </div>

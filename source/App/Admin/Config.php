@@ -1,6 +1,10 @@
 <?php
 
 namespace Source\App\Admin;
+use Source\Models\Company;
+use Source\Models\Course;
+use Source\Models\Event;
+use Source\Models\Role;
 use Source\Models\School;
 
 class Config extends Admin
@@ -69,7 +73,9 @@ class Config extends Admin
 
         echo $this->view->render("widgets/config/companies", [
             "app" => "config/companies",
-            "head" => $head]);
+            "head" => $head,
+            "companies" => (new Company())->find()->order("name")->fetch(true)
+        ]);
     }
 
 
@@ -89,7 +95,8 @@ class Config extends Admin
 
         echo $this->view->render("widgets/config/roles", [
             "app" => "config/roles",
-            "head" => $head
+            "head" => $head,
+            "roles" => (new Role())->find()->order("name")->fetch(true)
         ]);
     }
 
@@ -109,7 +116,9 @@ class Config extends Admin
 
         echo $this->view->render("widgets/config/events", [
             "app" => "config/events",
-            "head" => $head
+            "head" => $head,
+            "events" => (new Event())->find()->order("name")->fetch(true)
+
         ]);
     }
 
@@ -130,7 +139,8 @@ class Config extends Admin
 
         echo $this->view->render("widgets/config/courses", [
             "app" => "config/courses",
-            "head" => $head
+            "head" => $head,
+            "courses" => (new Course())->find()->order("name")->fetch(true)
         ]);
     }
 

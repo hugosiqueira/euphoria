@@ -93,7 +93,7 @@ class User extends Model
     public function save($pass=""): bool
     {
         if (!$this->required()) {
-            $this->message->warning("Nome, sobrenome, email são obrigatórios");
+            $this->message->warning("Nome, sobrenome, email e senha são obrigatórios");
             return false;
         }
 

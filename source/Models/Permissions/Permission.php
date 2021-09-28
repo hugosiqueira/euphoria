@@ -13,7 +13,7 @@ class Permission extends Model
      */
     public function __construct()
     {
-        parent::__construct("roles_permissions", ["id"], ["roles_id"], ["widget_id"]);
+        parent::__construct("roles_permissions", ["id"], ["roles_id","widget_id"]);
     }
 
     /**

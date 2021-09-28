@@ -15,10 +15,10 @@ $v->start("styles"); ?>
         <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                    <?php if (isset($school)): ?>
-                        <form id="general-info" class="section general-info" action="<?= url("/admin/config/school/{$school->id}"); ?>" method="post">
+                    <?php if (isset($company)): ?>
+                        <form id="general-info" class="section general-info" action="<?= url("/admin/config/company/{$company->id}"); ?>" method="post">
                             <input type="hidden" name="action" value="update"/>
-                            <input type="hidden" name="user_id" value="<?=$school->id;?>"/>
+                            <input type="hidden" name="user_id" value="<?=$company->id;?>"/>
                             <div class="info">
                                 <h6 class="">Dados Institucionais</h6>
                                 <div class="row">
@@ -30,23 +30,29 @@ $v->start("styles"); ?>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="name"><strong>Nome:</strong></label>
-                                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nome" value="<?=$school->name;?>" aria-label="Nome">
+                                                                <input type="text" class="form-control" id="name" name="name" placeholder="Nome" value="<?=$company->name;?>" aria-label="Nome">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="sigla"><strong>Sigla:</strong></label>
-                                                                <input type="text" class="form-control" id="sigla" name="sigla" placeholder="Sigla" value="<?=$school->sigla;?>" aria-label="Sigla">
+                                                                <label for="email"><strong>E-mail:</strong></label>
+                                                                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value="<?=$company->email;?>"  aria-label="E-mail">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="celular"><strong>Celular:</strong></label>
+                                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular"  value="<?=$company->celular;?>" aria-label="Celular">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label for="states_id"><strong>Estado:</strong></label>
                                                             <i class="flaticon-fill-area"></i>
-                                                            <select class="form-control" id="states_id" name="states_id">
+                                                            <select class="form-control" id="states_id">
                                                                 <option>Escolha o estado...</option>
                                                                 <?php
                                                                 foreach($states as $state):
-                                                                    $selected = ($state->id == $school->states_id ? 'selected': '');
+                                                                    $selected = ($state->id == $company->states_id ? 'selected': '');
                                                                     echo "<option value='{$state->id}' {$selected} >{$state->name}</option>";
                                                                 endforeach;
                                                                 ?>
@@ -59,25 +65,19 @@ $v->start("styles"); ?>
                                                                 <option>Escolha a cidade...</option>
                                                                 <?php
                                                                 foreach($cities as $city):
-                                                                    $selected = ($city->id == $school->cities_id ? 'selected': '');
+                                                                    $selected = ($city->id == $company->cities_id ? 'selected': '');
                                                                     echo "<option value='{$city->id}' {$selected} >{$city->name}</option>";
                                                                 endforeach;
                                                                 ?>
                                                             </select>
                                                         </div>
-                                                        <div class="col-sm-9">
+                                                        <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="address"><strong>Endereço:</strong></label>
-                                                                <input type="text" class="form-control" id="address" name="address" placeholder="Endereço" value="<?=$school->address;?>" aria-label="Endereço">
+                                                                <label for="address"><strong>Endereço completo:</strong></label>
+                                                                <input type="text" class="form-control" id="address" name="address" placeholder="Endereço" value="<?=$company->address;?>" aria-label="Endereço">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-3">
-                                                            <div class="form-group">
-                                                                <label for="number"><strong>Número</strong></label>
-                                                                <input type="text" class="form-control" id="number" name="number" placeholder="Número" value="<?=$school->number;?>" aria-label="Número">
 
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                     <div class="col-md-12 text-right mb-5">
@@ -93,7 +93,7 @@ $v->start("styles"); ?>
                             </div>
                         </form>
                     <?php else: ?>
-                        <form id="general-info" class="section general-info" action="<?= url("/admin/config/school"); ?>" method="post">
+                        <form id="general-info" class="section general-info" action="<?= url("/admin/config/company"); ?>" method="post">
                             <input type="hidden" name="action" value="create"/>
                             <div class="info">
                                 <h6 class="">Dados Institucionais</h6>
@@ -111,14 +111,20 @@ $v->start("styles"); ?>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="sigla"><strong>Sigla:</strong></label>
-                                                                <input type="text" class="form-control" id="sigla" name="sigla" placeholder="Sigla"  aria-label="Sigla">
+                                                                <label for="email"><strong>E-mail:</strong></label>
+                                                                <input type="email" class="form-control" id="email" name="email" placeholder="E-mail"  aria-label="E-mail">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="celular"><strong>Celular:</strong></label>
+                                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Celular"  aria-label="Celular">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label for="states_id"><strong>Estado:</strong></label>
                                                             <i class="flaticon-fill-area"></i>
-                                                            <select class="form-control" id="states_id" name="states_id">
+                                                            <select class="form-control" id="states_id" >
                                                                 <option>Escolha o estado...</option>
                                                                 <?php
                                                                 foreach($states as $state):
@@ -134,19 +140,13 @@ $v->start("styles"); ?>
                                                                 <option>Primeiro escolha o estado...</option>
                                                             </select>
                                                         </div>
-                                                        <div class="col-sm-9">
+                                                        <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="address"><strong>Endereço:</strong></label>
+                                                                <label for="address"><strong>Endereço completo:</strong></label>
                                                                 <input type="text" class="form-control" id="address" name="address" placeholder="Endereço" aria-label="Endereço">
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-3">
-                                                            <div class="form-group">
-                                                                <label for="number"><strong>Número</strong></label>
-                                                                <input type="text" class="form-control" id="number" name="number" placeholder="Número" aria-label="Número">
 
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                     <div class="col-md-12 text-right mb-5">
@@ -192,7 +192,7 @@ $v->start("styles"); ?>
             echo $sep."{'id':'".$city->id."', 'name':'".$city->name."', 'uf':'".$city->uf."'}";
             $sep =",";
         }?>
-        ];
+    ];
 
     $(document).ready(function () {
 

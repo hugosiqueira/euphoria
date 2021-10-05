@@ -48,7 +48,22 @@
                     </div>
                 </div>
             </div>
-            <?php foreach ($events as $event):
+            <?php
+        if(!$fees):
+            ?>
+            <div class="searchable-items list">
+                <div class="items">
+                    <div class="item-content align-items-center">
+                        <div class="text-center">
+                            Ainda não existem eventos cadastrados.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php
+        else:
+            foreach ($events as $event):
                 ?>
                 <div class="items">
                     <div class="item-content">
@@ -81,7 +96,9 @@
                         </div>
                     </div>
                 </div>
-            <?php endforeach;?>
+            <?php endforeach;
+
+            endif;?>
         </div>
 
     </div>

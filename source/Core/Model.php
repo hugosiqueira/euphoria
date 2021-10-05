@@ -60,7 +60,7 @@ abstract class Model
     public function __construct(string $entity, array $protected, array $required)
     {
         $this->entity = $entity;
-        $this->protected = array_merge($protected, ['created_at', "updated_at"]);
+        $this->protected = array_merge($protected, ["updated_at"]);
         $this->required = $required;
         $this->message = new Message();
     }

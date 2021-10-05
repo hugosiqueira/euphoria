@@ -377,7 +377,7 @@
       font-size: 16px;
       color: #4361ee;
       font-weight: 500; }
-    .invoice-actions .invoice-action-tax .invoice-action-tax-fields {
+    .invoice-actions .invoice-action-tax .invoice-action-tax-fields . invoice-action-currency{
       margin: 0 25px 0 25px; }
     .invoice-actions .invoice-action-tax .input-rate {
       position: relative;

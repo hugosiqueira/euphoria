@@ -1709,13 +1709,40 @@ input[disabled], select[disabled], textarea[disabled], input[readonly], select[r
 .table-controls > li > a svg {
   color: #25d5e4; }
 
+.table-controls {
+  padding: 0;
+  margin-bottom: 0; }
+.table-controls li {
+  list-style: none;
+  display: inline; }
+.table-controls li svg {
+  /* color: $m-color_6;
+    vertical-align: middle;
+    width: 28px;
+    height: 28px;
+    fill: rgba(0, 23, 55, 0.08);
+    cursor: pointer; */
+  /* color: $dark;
+    margin-right: 6px;
+    vertical-align: middle;
+    fill: $m-color_1; */
+  cursor: pointer;
+  /* stroke-width: 1; */
+  margin: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #515365;
+  stroke-width: 1.5;
+  width: 28px;
+  height: 28px; }
+
 .table tr td .custom-dropdown.t-custom-dropdown a.dropdown-toggle, .table tr td .custom-dropdown-icon.t-custom-dropdown a.dropdown-toggle {
   border-radius: 5px;
   border: 1px solid #d3d3d3; }
 
 .table-controls > li > a svg {
   color: #888ea8;
-  width: 21px; }
+  width: 28px; }
 
 /*  Table Dark      */
 .table.table-dark > thead > tr > th {

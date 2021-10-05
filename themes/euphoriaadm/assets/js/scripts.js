@@ -241,6 +241,7 @@ $(function () {
     // MAKS
 
         $(".mask-date").mask('00/00/0000');
+        $(".mask-tel").mask('(00) 90000-0000');
         $(".mask-datetime").mask('00/00/0000 00:00');
         $(".mask-month").mask('00/0000', {reverse: true});
         $(".mask-doc").mask('000.000.000-00', {reverse: true});

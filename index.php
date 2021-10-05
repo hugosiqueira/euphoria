@@ -60,6 +60,12 @@ $route->get("/config/course", "Courses:course");
 $route->post("/config/course", "Courses:course");
 $route->get("/config/course/{course_id}", "Courses:course");
 $route->post("/config/course/{course_id}", "Courses:course");
+$route->get("/config/fees", "Config:fees");
+$route->get("/config/fee", "Fees:fee");
+$route->post("/config/fee", "Fees:fee");
+$route->get("/config/fee/{fee_id}", "Fees:fee");
+$route->post("/config/fee/{fee_id}", "Fees:fee");
+
 
 
 
@@ -83,7 +89,13 @@ $route->get("/logoff", "Dash:logoff");
 
 //opportunities
 $route->get("/opportunities", "Opportunities:home");
-$route->get("/opportunities/new", "Opportunities:new");
+$route->post("/opportunities", "Opportunities:home");
+$route->get("/opportunity", "Opportunities:opportunity");
+$route->post("/opportunity", "Opportunities:opportunity");
+$route->get("/opportunities/opportunity", "Opportunities:opportunity");
+$route->post("/opportunities/opportunity", "Opportunities:opportunity");
+$route->get("/opportunities/opportunity/{opportunity_id}", "Opportunities:opportunity");
+$route->post("/opportunities/opportunity/{opportunity_id}", "Opportunities:opportunity");
 
 //templates
 $route->get("/templates", "Templates:home");

@@ -55,6 +55,16 @@ class User extends Model
         $find = $this->find("email = :email", "email={$email}", $columns);
         return $find->fetch();
     }
+    /**
+     * @param string $role
+     * @param string $columns
+     * @return null|User
+     */
+    public function findByRole(int $role, string $columns = "*"): ?User
+    {
+        $find = $this->find("roles_id = :r", "r={$role}", $columns);
+        return $find->fetch();
+    }
 
 
     /**

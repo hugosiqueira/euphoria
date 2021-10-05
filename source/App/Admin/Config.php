@@ -4,6 +4,7 @@ namespace Source\App\Admin;
 use Source\Models\Company;
 use Source\Models\Course;
 use Source\Models\Event;
+use Source\Models\Fee;
 use Source\Models\Role;
 use Source\Models\School;
 
@@ -141,6 +142,27 @@ class Config extends Admin
             "app" => "config/courses",
             "head" => $head,
             "courses" => (new Course())->find()->order("name")->fetch(true)
+        ]);
+    }
+
+    /**
+     * @param array|null $data
+     * @throws \Exception
+     */
+    public function fees(?array $data): void
+    {
+        $head = $this->seo->render(
+            CONF_SITE_NAME . " | Taxas",
+            CONF_SITE_DESC,
+            url("/admin"),
+            theme("/assets/images/image.jpg", CONF_VIEW_ADMIN),
+            false
+        );
+
+        echo $this->view->render("widgets/config/fees", [
+            "app" => "config/fees",
+            "head" => $head,
+            "fees" => (new Fee())->find()->order("name")->fetch(true)
         ]);
     }
 

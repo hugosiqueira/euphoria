@@ -49,7 +49,7 @@ var invoiceList = $('#invoice-list').DataTable({
             text: '+ Adicionar',
             className: 'btn btn-primary btn-sm',
             action: function(e, dt, node, config ) {
-                window.location = 'new';
+                window.location = 'admin/opportunity';
             }
         }
     ],

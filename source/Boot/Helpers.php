@@ -493,3 +493,4 @@ function formatPhone($phone)
     }
 
 }
+

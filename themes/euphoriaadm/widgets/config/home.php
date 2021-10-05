@@ -98,4 +98,22 @@ $v->start("styles");
             </a>
         </div>
     </div>
+
+</div>
+<div class="row mt-5">
+    <div id="card_1" class="col-lg-4">
+        <div class="statbox box box-shadow">
+            <a href="<?=url('admin/config/fees');?>">
+                <div class="card component-card_1">
+                    <div class="card-body text-center">
+                        <div class="icon-svg">
+                            <i data-feather="dollar-sign"></i>
+                        </div>
+                        <h5 class="card-title text-center">Taxas</h5>
+                        <p class="card-text">Adicionar e gerenciar as taxas dos cálculos.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
 </div>

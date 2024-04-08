@@ -85,8 +85,8 @@ define("CONF_IMAGE_QUALITY", ["jpg" => 75, "png" => 5]);
  */
 define("CONF_MAIL_HOST", "smtp-relay.sendinblue.com");
 define("CONF_MAIL_PORT", "587");
-define("CONF_MAIL_USER", "admin@tanamalasm.com.br");
-define("CONF_MAIL_PASS", "W9m8bk3qZRAa6NMV");
+define("CONF_MAIL_USER", "");
+define("CONF_MAIL_PASS", "");
 define("CONF_MAIL_SENDER", ["name" => "Euphoria Formaturas", "address" => "orcamentos@euphoria.com.br"]);
 define("CONF_MAIL_SUPPORT", "hugo@agenciabee.com");
 define("CONF_MAIL_OPTION_LANG", "br");
